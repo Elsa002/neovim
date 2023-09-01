@@ -160,6 +160,14 @@ table.insert(plugins, {
   opts = {},
   event = "BufRead",
 })
+table.insert(plugins, {
+  "rhysd/committia.vim",
+  config = function()
+    vim.cmd [[
+      source ~/.config/nvim/lua/plugins/committia.vim
+    ]]
+  end
+})
 
 
 -- *** Other ******************************************************************
