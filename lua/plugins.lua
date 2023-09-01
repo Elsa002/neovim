@@ -212,6 +212,9 @@ table.insert(plugins, {
   end,
 })
 table.insert(plugins, {
+  'mfussenegger/nvim-dap',
+})
+table.insert(plugins, {
   "norcalli/nvim-colorizer.lua",
   config = function()
     require('colorizer').setup({})

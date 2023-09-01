@@ -19,7 +19,8 @@ cmake.setup({
   },
   cmake_dap_configuration = { -- debug settings for cmake
     name = "cpp",
-    type = "codelldb",
+    type = "cppdbg",
+    -- type = "codelldb",
     request = "launch",
     stopOnEntry = false,
     runInTerminal = true,
@@ -241,3 +242,18 @@ insert_component {
 }
 
 lualine.setup(config)
+
+local dap = require('dap')
+dap.adapters.codelldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    command = vim.fn.getenv('HOME') .. '/.local/share/nvim/mason/bin/codelldb',
+    args = {"--port", "${port}"},
+  }
+}
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = vim.fn.getenv('HOME') .. '/.local/share/nvim/mason/bin/OpenDebugAD7'
+}
