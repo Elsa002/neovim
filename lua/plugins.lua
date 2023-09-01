@@ -72,7 +72,16 @@ local plugins = {
   -- LSP
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "neovim/nvim-lspconfig",
+  {
+    "neovim/nvim-lspconfig" ,
+    config = function()
+      require('plugins/lsp_config')
+    end,
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    }
+  },
 
   -- Nvim-Cmp
   { "onsails/lspkind-nvim", lazy = true },
