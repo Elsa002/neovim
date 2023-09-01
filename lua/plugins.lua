@@ -21,6 +21,7 @@ local plugins = {
 }
 
 local lazy_opts = {
+  concurrency = 5,
   git = {
     log = { "-8" },
     timeout = 120,
