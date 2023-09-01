@@ -77,6 +77,18 @@ table.insert(plugins, {
     "nvim-lua/plenary.nvim"
   },
 })
+table.insert(plugins, {
+  'akinsho/bufferline.nvim',
+  opts = {},
+  dependencies = 'nvim-tree/nvim-web-devicons',
+})
+table.insert(plugins, {
+  "artart222/vim-resize",
+  event = "BufEnter"
+})
+table.insert(plugins, { 'karb94/neoscroll.nvim', opts = {} })
+table.insert(plugins, { 'petertriho/nvim-scrollbar', opts = {} })
+table.insert(plugins, { 'akinsho/toggleterm.nvim', opts = {} })
 
 
 -- *** Syntax *****************************************************************
@@ -102,6 +114,7 @@ table.insert(plugins, {
     "hrsh7th/nvim-cmp",
   }
 })
+table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
 
 
 -- *** Snippets ***************************************************************
@@ -140,9 +153,36 @@ table.insert(plugins, {
 })
 
 
+-- *** Git ********************************************************************
+table.insert(plugins, { "tpope/vim-fugitive" })
+table.insert(plugins, {
+  "lewis6991/gitsigns.nvim",
+  opts = {},
+  event = "BufRead",
+})
+
+
 -- *** Other ******************************************************************
--- Syntax for kitty config
 table.insert(plugins, { "fladson/vim-kitty" })
+table.insert(plugins, { "folke/which-key.nvim", opts = {} })
+table.insert(plugins, {
+  "jghauser/mkdir.nvim",
+  config = function()
+    require("mkdir")
+  end
+})
+table.insert(plugins, {
+  "terrortylor/nvim-comment",
+  config = function()
+    require('nvim_comment').setup({
+      marker_padding = true,
+      comment_empty = false,
+      comment_empty_trim_whitespace = true,
+      create_mappings = false,
+      hook = nil
+    })
+  end,
+})
 
 
 -- *** Loading Lazy ***********************************************************

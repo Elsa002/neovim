@@ -48,6 +48,28 @@ map("n", "<Leader>th", ":Telescope colorscheme<CR>")
 map("n", "<Leader>t", ":Telescope<CR>")
 
 
+-- *** Buffers ****************************************************************
+-- Buffer resizing.
+map("n", "<S-h>", ":call ResizeLeft(3)<CR><Esc>")
+map("n", "<S-l>", ":call ResizeRight(3)<CR><Esc>")
+map("n", "<S-k>", ":call ResizeUp(1)<CR><Esc>")
+map("n", "<S-j>", ":call ResizeDown(1)<CR><Esc>")
+
+-- Buffer switching.
+map("n", "<A-[>", ":BufferLineCyclePrev<CR>")
+map("n", "<A-]>", ":BufferLineCycleNext<CR>")
+
+-- Buffer opening
+map("n", "<Leader>bb", ":BufferLinePick<CR>")
+
+-- Buffer closing.
+map("n", "<Leader>bc", ":BufferLinePickClose<CR>")
+
+-- Buffer moving.
+map("n", "<Leader>bl", ":BufferLineMoveNext<CR>")
+map("n", "<Leader>bh", "::BufferLineMovePrev<CR>")
+
+
 -- *** Lsp ********************************************************************
 map("n", "<Leader>,", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
 map("n", "<Leader>;", ":lua vim.lsp.diagnostic.goto_next()<CR>")
@@ -59,3 +81,30 @@ map("n", "<Leader>m", ":lua vim.lsp.buf.rename()<CR>")
 -- map("n", "<Leader>r", ":lua vim.lsp.buf.references()<CR>")
 map("n", "<Leader>r", ":Telescope lsp_references<CR>")
 map("n", "<Leader>s", ":lua vim.lsp.buf.document_symbol()<CR>")
+
+
+-- *** ToggleTerm *************************************************************
+map("n", "<C-t>", ":ToggleTerm<CR>")
+map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>")
+map("n", "v:count1 <C-t>", ":v:count1" .. "\"ToggleTerm\"<CR>")
+map("v", "v:count1 <C-t>", ":v:count1" .. "\"ToggleTerm\"<CR>")
+function _G.set_terminal_keymaps()
+  map("t", "<esc>", "<C-\\><C-n>")
+  map("t", "<C-q>", "<esc>")
+
+  map("t", "<A-h>", "<c-\\><c-n><c-w>h")
+  map("t", "<A-j>", "<c-\\><c-n><c-w>j")
+  map("t", "<A-k>", "<c-\\><c-n><c-w>k")
+  map("t", "<A-l>", "<c-\\><c-n><c-w>l")
+
+  -- map("t", "<S-h>", "<c-\\><C-n>:call ResizeLeft(3)<CR>")
+  -- map("t", "<S-j>", "<c-\\><C-n>:call ResizeDown(1)<CR>")
+  -- map("t", "<S-k>", "<c-\\><C-n>:call ResizeUp(1)<CR>")
+  -- map("t", "<S-l>", "<c-\\><C-n>:call ResizeRight(3)<CR>")
+end
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+
+-- *** Comment Toggle *********************************************************
+map("n", "<C-/>", ":CommentToggle<CR>")
+map("v", "<C-/>", ":'<,'>CommentToggle<CR>")
