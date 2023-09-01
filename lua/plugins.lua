@@ -1,3 +1,4 @@
+-- *** Bootstrap **************************************************************
 local LAZY_GIT_URL = "https://github.com/folke/lazy.nvim.git"
 local LAZY_GIT_BRANCH = "--branch=stable"  -- latest stable release
 
@@ -14,11 +15,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+-- *** Plugins ****************************************************************
 local plugins = {
-  -- Misc
+
+
+  -- *** Misc *****************************************************************
   { "nvim-lua/plenary.nvim", lazy = true },
 
-  -- Themes
+
+  -- *** Themes ***************************************************************
   { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "ful1e5/onedark.nvim",
@@ -44,7 +50,7 @@ local plugins = {
     end,
   },
 
-  -- UI
+  -- *** UI *******************************************************************
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
@@ -61,7 +67,7 @@ local plugins = {
     },
   },
 
-  -- Syntax
+  -- *** Syntax ***************************************************************
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
@@ -69,7 +75,7 @@ local plugins = {
     end,
   },
 
-  -- LSP
+  -- *** LSP ******************************************************************
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   {
@@ -80,10 +86,25 @@ local plugins = {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/nvim-cmp",
     }
   },
 
-  -- Nvim-Cmp
+
+  -- *** Snippets *************************************************************
+  { "L3MON4D3/LuaSnip", lazy = true },
+  { "rafamadriz/friendly-snippets", lazy = true },
+  {
+    "saadparwaiz1/cmp_luasnip",
+    lazy = true,
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+    },
+  },
+
+
+  -- *** Completion ***********************************************************
   { "onsails/lspkind-nvim", lazy = true },
   { "hrsh7th/cmp-nvim-lsp", lazy = true },
   { "hrsh7th/cmp-path", lazy = true },
@@ -97,6 +118,7 @@ local plugins = {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lua",
+      "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim"
     },
     config = function()
@@ -105,6 +127,8 @@ local plugins = {
   },
 }
 
+
+-- *** Loading Lazy ***********************************************************
 local lazy_opts = {
   git = {
     log = { "-8" },

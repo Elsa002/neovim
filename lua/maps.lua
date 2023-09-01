@@ -15,6 +15,9 @@ end
 -- Clearing highlights after searching word in file.
 map("n", "<Leader>h", ":noh<CR>")
 
+-- Remove unnecessary white spaces.
+map("n", "<Leader>rs", ":%s/ \\+$//<CR>")
+
 -- Split navigations.
 map("n", "<A-j>", "<C-w><C-j>")
 map("n", "<A-k>", "<C-w><C-k>")
