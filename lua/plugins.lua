@@ -215,6 +215,13 @@ table.insert(plugins, {
   'mfussenegger/nvim-dap',
 })
 table.insert(plugins, {
+  'rcarriga/nvim-dap-ui',
+  config = function ()
+    require('dapui').setup({})
+  end,
+  dependencies = { 'mfussenegger/nvim-dap' }
+})
+table.insert(plugins, {
   "norcalli/nvim-colorizer.lua",
   config = function()
     require('colorizer').setup({})
