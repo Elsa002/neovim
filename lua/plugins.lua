@@ -33,7 +33,18 @@ local lazy_opts = {
 
 -- *** Misc *******************************************************************
 table.insert(plugins, { "nvim-lua/plenary.nvim", lazy = true })
-
+table.insert(plugins, {
+  'rmagatti/auto-session',
+  opts = {
+    log_level = "error",
+    auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/", "/tmp" },
+  }
+})
+table.insert(plugins, {
+  'rmagatti/session-lens',
+  opts = {--[[your custom config--]]},
+  dependencies = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+})
 
 -- *** Themes *****************************************************************
 table.insert(plugins, { "nvim-tree/nvim-web-devicons", lazy = true })
