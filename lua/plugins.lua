@@ -46,6 +46,7 @@ table.insert(plugins, {
   dependencies = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
 })
 
+
 -- *** Themes *****************************************************************
 table.insert(plugins, { "nvim-tree/nvim-web-devicons", lazy = true })
 table.insert(plugins, {
@@ -124,6 +125,7 @@ table.insert(plugins, {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/nvim-cmp",
+    "j-hui/fidget.nvim",
   }
 })
 table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
@@ -201,6 +203,18 @@ table.insert(plugins, {
       create_mappings = false,
       hook = nil
     })
+  end,
+})
+table.insert(plugins, {
+  'Civitasv/cmake-tools.nvim',
+  config = function()
+    require('plugins/cmake')
+  end,
+})
+table.insert(plugins, {
+  "norcalli/nvim-colorizer.lua",
+  config = function()
+    require('colorizer').setup({})
   end,
 })
 
