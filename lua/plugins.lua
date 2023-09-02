@@ -87,6 +87,15 @@ table.insert(plugins, {
   end
 })
 table.insert(plugins, {
+  'tanvirtin/monokai.nvim',
+  lazy = false,    -- Load on startup
+  priority = 1000, -- Load first
+  config = function()
+    require('monokai').setup(config.monokai_opts)
+  end
+})
+
+table.insert(plugins, {
   "catppuccin/nvim",
   name = "catppuccin",
   lazy = false,    -- Load on startup

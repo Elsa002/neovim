@@ -38,6 +38,7 @@ local default_config = {
     contrast = "hard"
   },
   tokyonight_opts = {},
+  monokai_opts = {},
 
   -- Add extra plugins here in Lazy's format.
   extra_plugins = {},
