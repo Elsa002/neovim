@@ -2,7 +2,7 @@ local present, cmp = pcall(require, "cmp")
 if not present then
   return
 end
-local lspkind = require("lspkind")
+local has_lspkind, lspkind = pcall(require, "lspkind")
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -38,7 +38,7 @@ cmp.setup {
     end,
   },
   formatting = {
-    format = lspkind.cmp_format({ with_text = false, maxwidth = 50 })
+    format = has_lspkind and lspkind.cmp_format({ with_text = false, maxwidth = 50 }) or nil
   },
   sources = {
     { name = "nvim_lsp" },

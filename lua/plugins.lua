@@ -1,3 +1,7 @@
+-- --- Config -----------------------------------------------------------------
+local config = require('user.get_config')
+
+
 -- --- Bootstrap --------------------------------------------------------------
 local LAZY_GIT_URL = "https://github.com/folke/lazy.nvim.git"
 local LAZY_GIT_BRANCH = "--branch=stable" -- latest stable release
@@ -33,11 +37,20 @@ local lazy_opts = {
 
 -- --- Misc -------------------------------------------------------------------
 table.insert(plugins, { "nvim-lua/plenary.nvim", lazy = true })
+
+local auto_session_suppress_dirs = config.extra_auto_session_suppress_dirs
+table.insert(auto_session_suppress_dirs, "/")
+table.insert(auto_session_suppress_dirs, "/tmp")
+table.insert(auto_session_suppress_dirs, "/etc")
+table.insert(auto_session_suppress_dirs, "~/")
+table.insert(auto_session_suppress_dirs, "~/Downloads")
+table.insert(auto_session_suppress_dirs, "~/Documents")
+table.insert(auto_session_suppress_dirs, "~/Projects")
 table.insert(plugins, {
   'rmagatti/auto-session',
   opts = {
     log_level = "error",
-    auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/", "/tmp" },
+    auto_session_suppress_dirs = auto_session_suppress_dirs,
   }
 })
 table.insert(plugins, {
@@ -48,14 +61,16 @@ table.insert(plugins, {
 
 
 -- --- Themes -----------------------------------------------------------------
-table.insert(plugins, { "nvim-tree/nvim-web-devicons", lazy = true })
+local icons_plugin = nil
+if config.use_dev_icons then
+  icons_plugin = "nvim-tree/nvim-web-devicons"
+  table.insert(plugins, { icons_plugin, lazy = true })
+end
 table.insert(plugins, {
-  "ful1e5/onedark.nvim",
+  config.theme_plugin,
   lazy = false,    -- Load on startup
   priority = 1000, -- Load first
-  config = function()
-    require('onedark').setup()
-  end,
+  config = config.theme_config,
 })
 table.insert(plugins, {
   "nvim-lualine/lualine.nvim",
@@ -63,15 +78,17 @@ table.insert(plugins, {
   config = function()
     require('lualine').setup()
   end,
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { icons_plugin },
 })
-table.insert(plugins, {
-  "lukas-reineke/indent-blankline.nvim",
-  event = "BufRead",
-  setup = function()
-    require("plugins/indent-blankline")
-  end,
-})
+if config.show_indentations then
+  table.insert(plugins, {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    setup = function()
+      require("plugins/indent-blankline")
+    end,
+  })
+end
 
 
 -- --- UI ---------------------------------------------------------------------
@@ -81,7 +98,7 @@ table.insert(plugins, {
     require('plugins/nvimtree')
   end,
   dependencies = {
-    "nvim-tree/nvim-web-devicons"
+    icons_plugin
   },
 })
 table.insert(plugins, {
@@ -93,13 +110,15 @@ table.insert(plugins, {
 table.insert(plugins, {
   'akinsho/bufferline.nvim',
   opts = {},
-  dependencies = 'nvim-tree/nvim-web-devicons',
+  dependencies = icons_plugin,
 })
 table.insert(plugins, {
   "artart222/vim-resize",
   event = "BufEnter"
 })
-table.insert(plugins, { 'karb94/neoscroll.nvim', opts = {} })
+if config.smooth_scroll then
+  table.insert(plugins, { 'karb94/neoscroll.nvim', opts = {} })
+end
 table.insert(plugins, { 'petertriho/nvim-scrollbar', opts = {} })
 table.insert(plugins, { 'akinsho/toggleterm.nvim', opts = {} })
 
@@ -143,7 +162,9 @@ table.insert(plugins, {
     "j-hui/fidget.nvim",
   }
 })
-table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
+if config.lsp_signiture then
+  table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
+end
 
 
 -- --- Snippets ---------------------------------------------------------------
@@ -160,7 +181,11 @@ table.insert(plugins, {
 
 
 -- --- Completion -------------------------------------------------------------
-table.insert(plugins, { "onsails/lspkind-nvim", lazy = true })
+local lspkind_plugin = nil
+if config.use_dev_icons then
+  lspkind_plugin = "onsails/lspkind-nvim"
+  table.insert(plugins, { lspkind_plugin, lazy = true })
+end
 table.insert(plugins, { "hrsh7th/cmp-nvim-lsp", lazy = true })
 table.insert(plugins, { "hrsh7th/cmp-path", lazy = true })
 table.insert(plugins, { "hrsh7th/cmp-buffer", lazy = true })
@@ -174,7 +199,7 @@ table.insert(plugins, {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lua",
     "saadparwaiz1/cmp_luasnip",
-    "onsails/lspkind-nvim"
+    lspkind_plugin
   },
   config = function()
     require('plugins/cmp')
@@ -242,6 +267,12 @@ table.insert(plugins, {
     require('colorizer').setup({})
   end,
 })
+
+
+-- --- Loading Lazy -----------------------------------------------------------
+for _, p in ipairs(config.extra_plugins) do
+  table.insert(plugins, p)
+end
 
 
 -- --- Loading Lazy -----------------------------------------------------------
