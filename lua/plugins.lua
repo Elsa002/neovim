@@ -61,17 +61,49 @@ table.insert(plugins, {
 
 
 -- --- Themes -----------------------------------------------------------------
+table.insert(plugins, {
+  "navarasu/onedark.nvim",
+  lazy = false,    -- Load on startup
+  priority = 1000, -- Load first
+  config = function()
+    require('onedark').setup(config.onedark_opts)
+  end
+})
+table.insert(plugins, {
+  "ellisonleao/gruvbox.nvim",
+  lazy = false,    -- Load on startup
+  priority = 1000, -- Load first
+  theme_config = function ()
+    require('gruvbox').setup(config.gruvbox_opts)
+    vim.o.background = "dark"
+  end,
+})
+table.insert(plugins, {
+  "folke/tokyonight.nvim",
+  lazy = false,    -- Load on startup
+  priority = 1000, -- Load first
+  config = function()
+    require('tokyonight').setup(config.tokyonight_opts)
+  end
+})
+table.insert(plugins, {
+  "catppuccin/nvim",
+  name = "catppuccin",
+  lazy = false,    -- Load on startup
+  priority = 1000, -- Load first
+})
+table.insert(plugins, { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 })
+table.insert(plugins, { "NLKNguyen/papercolor-theme", lazy = false, priority = 1000 })
+table.insert(plugins, { "Mofiqul/dracula.nvim", lazy = false, priority = 1000 })
+
+
+-- --- UI ---------------------------------------------------------------------
 local icons_plugin = nil
 if config.use_dev_icons then
   icons_plugin = "nvim-tree/nvim-web-devicons"
   table.insert(plugins, { icons_plugin, lazy = true })
 end
-table.insert(plugins, {
-  config.theme_plugin,
-  lazy = false,    -- Load on startup
-  priority = 1000, -- Load first
-  config = config.theme_config,
-})
+
 table.insert(plugins, {
   "nvim-lualine/lualine.nvim",
   lazy = false,
@@ -89,9 +121,6 @@ if config.show_indentations then
     end,
   })
 end
-
-
--- --- UI ---------------------------------------------------------------------
 table.insert(plugins, {
   "nvim-tree/nvim-tree.lua",
   config = function()
