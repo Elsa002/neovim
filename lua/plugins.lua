@@ -114,8 +114,23 @@ table.insert(plugins, {
 
 
 -- *** LSP ********************************************************************
-table.insert(plugins, { "williamboman/mason.nvim" })
-table.insert(plugins, { "williamboman/mason-lspconfig.nvim" })
+table.insert(plugins, {
+  "williamboman/mason.nvim",
+  config = function()
+    require('mason').setup({})
+  end
+})
+table.insert(plugins, {
+  "williamboman/mason-lspconfig.nvim",
+  dependencies = { "williamboman/mason.nvim" }
+})
+table.insert(plugins, {
+  "jay-babu/mason-nvim-dap.nvim",
+  config = function()
+    require('plugins.dap_config')
+  end,
+  dependencies = { "williamboman/mason.nvim" }
+})
 table.insert(plugins, {
   "neovim/nvim-lspconfig",
   config = function()
@@ -217,7 +232,7 @@ table.insert(plugins, {
 table.insert(plugins, {
   'rcarriga/nvim-dap-ui',
   config = function ()
-    require('dapui').setup({})
+    require('plugins.dapui')
   end,
   dependencies = { 'mfussenegger/nvim-dap' }
 })

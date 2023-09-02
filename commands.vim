@@ -13,3 +13,7 @@ command QA qa
 command WA wa
 command WQA wqa
 command XA xa
+
+" Dap UI
+command DapUIOpen lua require('dapui').open()
+command DapUIClose lua require('dapui').close()
