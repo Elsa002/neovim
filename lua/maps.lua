@@ -1,9 +1,9 @@
--- *** Settings ***************************************************************
+-- --- Settings ---------------------------------------------------------------
 -- Map leader key to space.
 vim.g.mapleader = " "
 
 
--- *** Functions **************************************************************
+-- --- Functions --------------------------------------------------------------
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
   if opts then options = vim.tbl_extend("force", options, opts) end
@@ -11,7 +11,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 
--- *** General ****************************************************************
+-- --- General ----------------------------------------------------------------
 -- Clearing highlights after searching word in file.
 map("n", "<Leader>h", ":noh<CR>")
 
@@ -31,11 +31,11 @@ map("n", "gj", "j")
 map("n", "gk", "k")
 
 
--- *** NvimTree ***************************************************************
+-- --- NvimTree ---------------------------------------------------------------
 map('n', '<leader>e', ':NvimTreeToggle<CR>')
 
 
--- *** Telescope **************************************************************
+-- --- Telescope --------------------------------------------------------------
 map("n", "<Leader>fw", ":Telescope live_grep<CR>")
 map("n", "<Leader>gt", ":Telescope git_status<CR>")
 -- map("n", "<Leader>cm", ":Telescope git_commits<CR>")
@@ -50,7 +50,7 @@ map("n", "<Leader>fc", ":Telescope grep_string<CR>")
 map("n", "<Leader>tt", ":Telescope<CR>")
 
 
--- *** Buffers ****************************************************************
+-- --- Buffers ----------------------------------------------------------------
 -- Buffer resizing.
 map("n", "<S-h>", ":call ResizeLeft(3)<CR><Esc>")
 map("n", "<S-l>", ":call ResizeRight(3)<CR><Esc>")
@@ -72,7 +72,7 @@ map("n", "<Leader>bl", ":BufferLineMoveNext<CR>")
 map("n", "<Leader>bh", "::BufferLineMovePrev<CR>")
 
 
--- *** Lsp ********************************************************************
+-- --- Lsp --------------------------------------------------------------------
 -- Native
 map("n", "<Leader>,", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
 map("n", "<Leader>;", ":lua vim.lsp.diagnostic.goto_next()<CR>")
@@ -92,7 +92,7 @@ map("n", "<Leader>r", ":Telescope lsp_references<CR>")
 --map("n", "<Leader>s", ":lua vim.lsp.buf.document_symbol()<CR>")
 
 
--- *** ToggleTerm *************************************************************
+-- --- ToggleTerm -------------------------------------------------------------
 map("n", "<C-t>", ":ToggleTerm<CR>")
 map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>")
 map("n", "v:count1 <C-t>", ":v:count1" .. "\"ToggleTerm\"<CR>")
@@ -114,12 +114,12 @@ end
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
 
--- *** Comment Toggle *********************************************************
+-- --- Comment Toggle ---------------------------------------------------------
 map("n", "<C-/>", ":CommentToggle<CR>")
 map("v", "<C-/>", ":'<,'>CommentToggle<CR>")
 
 
--- *** Debug ******************************************************************
+-- --- Debug ------------------------------------------------------------------
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)

@@ -69,6 +69,8 @@ cmake.setup({
   },
 })
 
+
+-- --- Add buttons to lualine -------------------------------------------------
 local colors = {
   yellow   = "#ECBE7B",
   cyan     = "#008080",

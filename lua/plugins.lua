@@ -1,4 +1,4 @@
--- *** Bootstrap **************************************************************
+-- --- Bootstrap --------------------------------------------------------------
 local LAZY_GIT_URL = "https://github.com/folke/lazy.nvim.git"
 local LAZY_GIT_BRANCH = "--branch=stable" -- latest stable release
 
@@ -16,7 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
--- *** Settings ***************************************************************
+-- --- Settings ---------------------------------------------------------------
 local plugins = {
 }
 
@@ -31,7 +31,7 @@ local lazy_opts = {
 }
 
 
--- *** Misc *******************************************************************
+-- --- Misc -------------------------------------------------------------------
 table.insert(plugins, { "nvim-lua/plenary.nvim", lazy = true })
 table.insert(plugins, {
   'rmagatti/auto-session',
@@ -47,7 +47,7 @@ table.insert(plugins, {
 })
 
 
--- *** Themes *****************************************************************
+-- --- Themes -----------------------------------------------------------------
 table.insert(plugins, { "nvim-tree/nvim-web-devicons", lazy = true })
 table.insert(plugins, {
   "ful1e5/onedark.nvim",
@@ -74,7 +74,7 @@ table.insert(plugins, {
 })
 
 
--- *** UI *********************************************************************
+-- --- UI ---------------------------------------------------------------------
 table.insert(plugins, {
   "nvim-tree/nvim-tree.lua",
   config = function()
@@ -104,7 +104,7 @@ table.insert(plugins, { 'petertriho/nvim-scrollbar', opts = {} })
 table.insert(plugins, { 'akinsho/toggleterm.nvim', opts = {} })
 
 
--- *** Syntax *****************************************************************
+-- --- Syntax -----------------------------------------------------------------
 table.insert(plugins, {
   "nvim-treesitter/nvim-treesitter",
   config = function()
@@ -113,7 +113,7 @@ table.insert(plugins, {
 })
 
 
--- *** LSP ********************************************************************
+-- --- LSP --------------------------------------------------------------------
 table.insert(plugins, {
   "williamboman/mason.nvim",
   config = function()
@@ -146,7 +146,7 @@ table.insert(plugins, {
 table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
 
 
--- *** Snippets ***************************************************************
+-- --- Snippets ---------------------------------------------------------------
 table.insert(plugins, { "L3MON4D3/LuaSnip", lazy = true })
 table.insert(plugins, { "rafamadriz/friendly-snippets", lazy = true })
 table.insert(plugins, {
@@ -159,7 +159,7 @@ table.insert(plugins, {
 })
 
 
--- *** Completion *************************************************************
+-- --- Completion -------------------------------------------------------------
 table.insert(plugins, { "onsails/lspkind-nvim", lazy = true })
 table.insert(plugins, { "hrsh7th/cmp-nvim-lsp", lazy = true })
 table.insert(plugins, { "hrsh7th/cmp-path", lazy = true })
@@ -182,7 +182,7 @@ table.insert(plugins, {
 })
 
 
--- *** Git ********************************************************************
+-- --- Git --------------------------------------------------------------------
 table.insert(plugins, { "tpope/vim-fugitive" })
 table.insert(plugins, {
   "lewis6991/gitsigns.nvim",
@@ -199,7 +199,7 @@ table.insert(plugins, {
 })
 
 
--- *** Other ******************************************************************
+-- --- Other ------------------------------------------------------------------
 table.insert(plugins, { "fladson/vim-kitty" })
 table.insert(plugins, { "folke/which-key.nvim", opts = {} })
 table.insert(plugins, {
@@ -244,5 +244,5 @@ table.insert(plugins, {
 })
 
 
--- *** Loading Lazy ***********************************************************
+-- --- Loading Lazy -----------------------------------------------------------
 require("lazy").setup(plugins, lazy_opts)
