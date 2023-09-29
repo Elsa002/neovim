@@ -45,6 +45,7 @@ local default_config = {
       cmdline = { pattern = "^:", icon = "", lang = "vim" },
       search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
       search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+      filter = false,
       bash = { pattern = "^:!", view = "cmdline_popup", icon = "$", lang = "bash" },
       bash_replace = { pattern = "^:%%!", view = "cmdline_popup", icon = "replace $", lang = "bash" },
       lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, view = "cmdline_popup", icon = "", lang = "lua" },
