@@ -32,6 +32,24 @@ local lazy_opts = {
     url_format = "https://github.com/%s.git",
     -- url_format = "git@github.com:%s.git",
   },
+  install = {
+    -- install missing plugins on startup. This doesn't increase startup time.
+    missing = false,
+    -- try to load one of these colorschemes when starting an installation during startup
+    colorscheme = { "habamax" },
+  },
+  checker = {
+    -- automatically check for plugin updates
+    enabled = true,
+    concurrency = 5, ---@type number? set to 1 to check for updates very slowly
+    notify = true, -- get a notification when new updates are found
+    frequency = 3600, -- check for updates every hour
+  },
+  change_detection = {
+    -- automatically check for config file changes and reload the ui
+    enabled = true,
+    notify = true, -- get a notification when changes are found
+  },
 }
 
 
@@ -104,6 +122,7 @@ table.insert(plugins, {
 table.insert(plugins, { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 })
 table.insert(plugins, { "NLKNguyen/papercolor-theme", lazy = false, priority = 1000 })
 table.insert(plugins, { "Mofiqul/dracula.nvim", lazy = false, priority = 1000 })
+table.insert(plugins, { "LunarVim/onedarker.nvim", lazy = false, priority = 1000 })
 
 
 -- --- UI ---------------------------------------------------------------------
@@ -124,16 +143,16 @@ table.insert(plugins, {
 if config.show_indentations then
   table.insert(plugins, {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufRead",
-    setup = function()
-      require("plugins/indent-blankline")
+    main = "ibl",
+    config = function()
+      require('plugins.indent_blankline')
     end,
   })
 end
 table.insert(plugins, {
   "nvim-tree/nvim-tree.lua",
   config = function()
-    require('plugins/nvimtree')
+    require('plugins.nvimtree')
   end,
   dependencies = {
     icons_plugin
@@ -159,13 +178,33 @@ if config.smooth_scroll then
 end
 table.insert(plugins, { 'petertriho/nvim-scrollbar', opts = {} })
 table.insert(plugins, { 'akinsho/toggleterm.nvim', opts = {} })
+table.insert(plugins, {
+  'rcarriga/nvim-notify',
+  config = function()
+    require('notify').setup(config.notify_opts)
+  end,
+})
+table.insert(plugins, { 'MunifTanjim/nui.nvim' })
+table.insert(plugins, {
+  "folke/noice.nvim",
+  event = "VeryLazy",
+  opts = {
+    cmdline = config.noice_cmdline_opts,
+    lsp = config.noice_lsp_opts,
+    presets = config.noice_presets_opts,
+  },
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "rcarriga/nvim-notify",
+    }
+})
 
 
 -- --- Syntax -----------------------------------------------------------------
 table.insert(plugins, {
   "nvim-treesitter/nvim-treesitter",
   config = function()
-    require('plugins/treesitter')
+    require('plugins.treesitter')
   end,
 })
 
@@ -191,7 +230,7 @@ table.insert(plugins, {
 table.insert(plugins, {
   "neovim/nvim-lspconfig",
   config = function()
-    require('plugins/lsp_config')
+    require('plugins.lsp_config')
   end,
   dependencies = {
     "williamboman/mason.nvim",
@@ -240,7 +279,7 @@ table.insert(plugins, {
     lspkind_plugin
   },
   config = function()
-    require('plugins/cmp')
+    require('plugins.cmp')
   end,
 })
 
@@ -286,7 +325,7 @@ table.insert(plugins, {
 table.insert(plugins, {
   'Civitasv/cmake-tools.nvim',
   config = function()
-    require('plugins/cmake')
+    require('plugins.cmake')
   end,
 })
 table.insert(plugins, {
