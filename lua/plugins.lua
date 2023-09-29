@@ -165,6 +165,15 @@ table.insert(plugins, {
   },
 })
 table.insert(plugins, {
+  'nvim-telescope/telescope-ui-select.nvim',
+  config = function()
+    require("telescope").load_extension("ui-select")
+  end,
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+  }
+})
+table.insert(plugins, {
   'akinsho/bufferline.nvim',
   opts = {},
   dependencies = icons_plugin,
@@ -187,16 +196,23 @@ table.insert(plugins, {
 table.insert(plugins, { 'MunifTanjim/nui.nvim' })
 table.insert(plugins, {
   "folke/noice.nvim",
+  enabled = true,
   event = "VeryLazy",
-  opts = {
-    cmdline = config.noice_cmdline_opts,
-    lsp = config.noice_lsp_opts,
-    presets = config.noice_presets_opts,
-  },
+  config = function()
+    require('noice').setup({
+      cmdline = config.noice_cmdline_opts,
+      lsp = config.noice_lsp_opts,
+      presets = config.noice_presets_opts,
+      routes = {
+        { view = "cmdline",filter = { event = "msg_showmode" } }
+      }
+    })
+  end,
   dependencies = {
     "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
-    }
+    "nvim-lualine/lualine.nvim",
+  }
 })
 
 
@@ -282,6 +298,16 @@ table.insert(plugins, {
   config = function()
     require('plugins.cmp')
   end,
+})
+
+table.insert(plugins, {
+  "windwp/nvim-autopairs",
+  event = "InsertEnter",
+  config = function()
+    require("plugins.autopairs")
+  end,
+  enabled = config.enable_autopairs,
+  dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" },
 })
 
 

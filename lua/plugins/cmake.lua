@@ -8,8 +8,7 @@ cmake.setup({
   cmake_regenerate_on_save = false, -- auto generate when save CMakeLists.txt
   cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
   cmake_build_options = {}, -- this will be passed when invoke `CMakeBuild`
-  cmake_build_directory = "", -- this is used to specify generate directory for cmake
-  cmake_build_directory_prefix = "cmake-builds/cmake-build-", -- when cmake_build_directory is set to "", this option will be activated
+  cmake_build_directory = "cmake-builds/cmake-build-${variant:buildType}", -- this is used to specify generate directory for cmake
   cmake_soft_link_compile_commands = false, -- this will automatically make a soft link from compile commands file to project root dir
   cmake_compile_commands_from_lsp = true, -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
   cmake_kits_path = nil, -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
@@ -31,7 +30,7 @@ cmake.setup({
     opts = {}, -- the options the executor will get, possible values depend on the executor type. See `default_opts` for possible values.
     default_opts = { -- a list of default and possible values for executors
       quickfix = {
-        show = "always", -- "always", "only_on_error"
+        show = "only_on_error", -- "always", "only_on_error"
         position = "belowright", -- "bottom", "top"
         size = 10,
       },

@@ -21,6 +21,9 @@ local default_config = {
   -- Suppress directories for auto saving sessions.
   extra_auto_session_suppress_dirs = {},
 
+  -- Auto pairs
+  enable_autopairs = true,
+
   -- Indentation marks
   show_indentations = true,
   use_color_indentations = true,
@@ -73,7 +76,7 @@ local default_config = {
   notify_opts = {
     timeout = 500,
     render = "wrapped-compact",
-    minimum_width = 20,
+    minimum_width = 30,
     max_width = 50,
   },
 
