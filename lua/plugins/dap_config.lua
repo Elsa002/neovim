@@ -6,4 +6,3 @@ require ('mason-nvim-dap').setup({
         end,
     },
 })
-

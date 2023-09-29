@@ -21,8 +21,9 @@ local default_config = {
   -- Suppress directories for auto saving sessions.
   extra_auto_session_suppress_dirs = {},
 
-  -- Show indentation marks
+  -- Indentation marks
   show_indentations = true,
+  use_color_indentations = true,
 
   -- Scroll smoothly.
   smooth_scroll = true,
@@ -35,7 +36,6 @@ local default_config = {
     enabled = true, -- enables the Noice cmdline UI
     view = "cmdline",
     opts = {}, -- global options for the cmdline. See section on views
-    ---@type table<string, CmdlineFormat>
     format = {
       -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
       -- view: cmdline/cmdline_popup (default is cmdline view)

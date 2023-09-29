@@ -239,6 +239,7 @@ table.insert(plugins, {
     "j-hui/fidget.nvim",
   }
 })
+table.insert(plugins, { "folke/neodev.nvim", opts = {} })
 if config.lsp_signiture then
   table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
 end
