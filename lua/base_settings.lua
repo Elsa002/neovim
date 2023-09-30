@@ -62,10 +62,6 @@ opt.timeoutlen = 1000
 -- Setting up autocomplete menu.
 opt.completeopt = "menuone,noselect"
 
--- Add cursorline and diasable it in terminal
-vim.cmd("autocmd WinEnter,BufEnter * if &ft is \"toggleterm\" | set nocursorline | else | set cursorline | endif")
-vim.cmd("autocmd WinEnter,BufEnter * if &ft is \"toggleterm\" | set nocursorcolumn | else | set cursorcolumn | endif")
-
 -- Set line number for help files.
 vim.cmd
 [[
@@ -75,7 +71,6 @@ augroup help_config
 augroup END
 ]]
 
--- Commands
-vim.cmd [[
-    source ~/.config/nvim/commands.vim
-]]
+-- Add cursorline and diasable it in terminal
+vim.cmd("autocmd WinEnter,BufEnter * if &ft is \"toggleterm\" | set nocursorline | else | set cursorline | endif")
+vim.cmd("autocmd WinEnter,BufEnter * if &ft is \"toggleterm\" | set nocursorcolumn | else | set cursorcolumn | endif")

@@ -140,15 +140,14 @@ table.insert(plugins, {
   end,
   dependencies = { icons_plugin },
 })
-if config.show_indentations then
-  table.insert(plugins, {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    config = function()
-      require('plugins.indent_blankline')
-    end,
-  })
-end
+table.insert(plugins, {
+  "lukas-reineke/indent-blankline.nvim",
+  enabled = config.show_indentations,
+  main = "ibl",
+  config = function()
+    require('plugins.indent_blankline')
+  end,
+})
 table.insert(plugins, {
   "nvim-tree/nvim-tree.lua",
   config = function()
@@ -193,9 +192,11 @@ table.insert(plugins, {
   "artart222/vim-resize",
   event = "BufEnter"
 })
-if config.smooth_scroll then
-  table.insert(plugins, { 'karb94/neoscroll.nvim', opts = {} })
-end
+table.insert(plugins, {
+  'karb94/neoscroll.nvim',
+  enabled = config.smooth_scroll,
+  opts = {}
+})
 table.insert(plugins, { 'petertriho/nvim-scrollbar', opts = {} })
 table.insert(plugins, { 'akinsho/toggleterm.nvim', opts = {} })
 table.insert(plugins, {
@@ -260,9 +261,30 @@ table.insert(plugins, {
   }
 })
 table.insert(plugins, { "folke/neodev.nvim", opts = {} })
-if config.lsp_signiture then
-  table.insert(plugins, { "ray-x/lsp_signature.nvim", opts = {} })
-end
+table.insert(plugins, {
+  "ray-x/lsp_signature.nvim",
+  enabled = config.lsp_signiture,
+  opts = {}
+})
+table.insert(plugins, {
+  "RRethy/vim-illuminate",
+  config = function()
+    require('illuminate').configure({
+      providers = {
+        'lsp',
+        'treesitter',
+      },
+    })
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function()
+        vim.api.nvim_set_hl(0, 'IlluminatedWordText', {})
+        vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { link = 'MatchParen' })
+        vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'MatchParen' })
+      end
+    })
+  end
+})
 
 
 -- --- Snippets ---------------------------------------------------------------

@@ -52,6 +52,13 @@ map("n", "k", "gk")
 map("n", "gj", "j")
 map("n", "gk", "k")
 
+-- Visual mode
+map("v", ">", ">gv")
+map("v", "<", "<gv")
+map("v", "y", "ygv")
+-- Keep original registry content after pasting in visual mode
+map("v", "p", "pgvy")
+
 
 -- --- NvimTree ---------------------------------------------------------------
 map_cmd('n', '<leader>e', 'NvimTreeToggle')
@@ -60,9 +67,8 @@ map_cmd('n', '<leader>e', 'NvimTreeToggle')
 -- --- Telescope --------------------------------------------------------------
 map_cmd("n", "<Leader>fw", "Telescope live_grep")
 map_cmd("n", "<Leader>gt", "Telescope git_status")
--- map_cmd("n", "<Leader>cm", "Telescope git_commits")
 map_cmd("n", "<Leader>ff", "Telescope find_files")
--- map_cmd("n", "<Leader>fp", "Telescope media_files")
+map_cmd("n", "<Leader>fa", "FindFilesAll")
 map_cmd("n", "<Leader>fb", "Telescope buffers")
 map_cmd("n", "<Leader>fh", "Telescope help_tags")
 map_cmd("n", "<Leader>fo", "Telescope oldfiles")
@@ -70,7 +76,7 @@ map_cmd("n", "<Leader>th", "Telescope colorscheme")
 map_cmd("n", "<Leader>ss", "Telescope spell_suggest")
 map_cmd("n", "<Leader>fc", "Telescope grep_string")
 map_cmd("n", "<Leader>tt", "Telescope")
-vim.keymap.set('n', '<Leader><Leader>', function() require('telescope.builtin').builtin() end)
+vim.keymap.set('n', '<Leader><Leader>', function() require('telescope.builtin').commands() end)
 
 
 -- --- Buffers ----------------------------------------------------------------
@@ -108,16 +114,10 @@ vim.keymap.set('n', '<Leader>tr', function() require('telescope.builtin').lsp_do
 vim.keymap.set('n', '<Leader>gd', function() require('telescope.builtin').lsp_definitions() end)
 vim.keymap.set('n', '<Leader>r', function() require('telescope.builtin').lsp_references() end)
 
--- Disabled
--- vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.formatting() end)
--- vim.keymap.set('n', '<Leader>s', function() vim.lsp.buf.document_symbol() end)
-
 
 -- --- ToggleTerm -------------------------------------------------------------
 map_cmd("n", "<C-t>", "ToggleTerm")
 map_cmd("t", "<C-t>", "ToggleTerm")
--- map("n", "v:count1 <C-t>", ":v:count1" .. "\"ToggleTerm\"<CR>")
--- map("v", "v:count1 <C-t>", ":v:count1" .. "\"ToggleTerm\"<CR>")
 function _G.set_terminal_keymaps()
   map("t", "<esc>", "<C-\\><C-n>")
   map("t", "<C-q>", "<esc>")
