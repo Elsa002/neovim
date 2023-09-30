@@ -55,7 +55,6 @@ map("n", "gk", "k")
 -- Visual mode
 map("v", ">", ">gv")
 map("v", "<", "<gv")
-map("v", "y", "ygv")
 -- Keep original registry content after pasting in visual mode
 map("v", "p", "pgvy")
 

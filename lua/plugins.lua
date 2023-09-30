@@ -186,24 +186,7 @@ table.insert(plugins, {
 table.insert(plugins, {
   'akinsho/bufferline.nvim',
   config = function()
-    require('bufferline').setup({
-      highlights = {
-        background = {
-          italic = true,
-        },
-        buffer_selected = {
-          bold = true,
-        },
-      },
-      options = {
-        diagnostics = "nvim_lsp",
-        diagnostics_update_in_insert = false,
-        diagnostics_indicator = function(count, level, _, _)
-          local icon = level:match("error") and " " or " "
-          return " " .. icon .. count
-        end,
-      }
-    })
+    require('plugins.bufferline')
   end,
   dependencies = icons_plugin,
 })
