@@ -389,7 +389,7 @@ table.insert(plugins, {
 table.insert(plugins, {
   'rcarriga/nvim-dap-ui',
   config = function ()
-    require('plugins.dapui')
+    require('plugins.dap_ui')
   end,
   dependencies = { 'mfussenegger/nvim-dap' }
 })
