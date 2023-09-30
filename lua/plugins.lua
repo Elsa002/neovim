@@ -136,7 +136,7 @@ table.insert(plugins, {
   "nvim-lualine/lualine.nvim",
   lazy = false,
   config = function()
-    require('lualine').setup()
+    require('lualine').setup({})
   end,
   dependencies = { icons_plugin },
 })
@@ -160,6 +160,17 @@ table.insert(plugins, {
 })
 table.insert(plugins, {
   "nvim-telescope/telescope.nvim",
+  config = function()
+    require("telescope").setup {
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {
+            -- even more opts
+          }
+        }
+      }
+    }
+  end,
   dependencies = {
     "nvim-lua/plenary.nvim"
   },
@@ -199,14 +210,7 @@ table.insert(plugins, {
   enabled = true,
   event = "VeryLazy",
   config = function()
-    require('noice').setup({
-      cmdline = config.noice_cmdline_opts,
-      lsp = config.noice_lsp_opts,
-      presets = config.noice_presets_opts,
-      routes = {
-        { view = "cmdline",filter = { event = "msg_showmode" } }
-      }
-    })
+    require('plugins.noice')
   end,
   dependencies = {
     "MunifTanjim/nui.nvim",
